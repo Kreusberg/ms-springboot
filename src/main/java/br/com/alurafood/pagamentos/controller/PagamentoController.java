@@ -3,6 +3,7 @@ package br.com.alurafood.pagamentos.controller;
 import br.com.alurafood.pagamentos.dto.PagamentoDto;
 import br.com.alurafood.pagamentos.service.PagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -31,6 +32,11 @@ public class PagamentoController {
         PagamentoDto dto = service.obterPorId(id);
 
         return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/porta")
+    public String retornaPorta(@Value("${local.server.port}") String porta) {
+        return String.format("Requisição respondida pela instância executando na porta %s", porta);
     }
 
     @PostMapping
